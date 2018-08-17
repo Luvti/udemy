@@ -8,7 +8,7 @@ Dark green: #28b485
 */
 /* универсальный селектов - всех элементов */
 *,
-*::after,                               /* sudo elements*/
+*::after,                               /* sudo element */
 *::before {
     margin: 0;                          /* удаляет у всех элементов margin */
     padding: 0;                         /* удаляет у всех элементов padding */
@@ -48,17 +48,17 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
 }
 
-.logo-box {
+.header__logo-box {
     position: absolute;                 /* для этого у родительского элемента должен быть position: relative*/
     top: 4rem;
     left: 4rem;
 }
 
-.logo {
+.header__logo {
     height: 3.5rem;
 }
 
-.text-box {
+.header__text-box {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -74,7 +74,7 @@ body {
     margin-bottom: 6rem;                /* отступ после h1 перед кнопкой */
 }
 
-.heading-primary-main {
+.heading-primary--main {
     display: block;                     /* чтобы span не был inline */
     font-size: 6rem;
     font-weight: 400;
@@ -90,7 +90,7 @@ body {
     */
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
     display: block;
     font-size: 2rem;
     font-weight: 700;
@@ -161,7 +161,7 @@ body {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);                  /* чем меньше y, x и blur - тем ближе к экрану*/
 }
 
-.btn-white {
+.btn--white {
     background-color: #ffffff;
     color: #777;
 }
@@ -177,14 +177,14 @@ body {
     z-index: -1;                /* чтобы эффект был ниже кнопки */
     transition: all 0.4s;
 }
-.btn-white::after {
+.btn--white::after {
     background-color: #ffffff;
 }
 .btn:hover::after {
     transform: scaleX(1.4) scaleY(1.6);         /* увеличивает кнопку */
     opacity: 0;
 }
-.btn-animated {
+.btn--animated {
     animation: moveInBottom .5s ease-out .75s;
     animation-fill-mode: backwards;             /* ставит на 0% до анимации */
 }
