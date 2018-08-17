@@ -33,7 +33,44 @@ body {
     url(../img/hero.jpg);
     background-size: cover;             /* пытается покрыть все пространство контейнера */
     background-position: top;
+    position: relative;
 
     /* изменение формы background */
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+}
+
+.logo-box {
+    position: absolute;                 /* для этого у родительского элемента должен быть position: relative*/
+    top: 40px;
+    left: 40px;
+}
+
+.logo {
+    height: 35px;
+}
+
+.text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%)    /* для сдвига относительно позиции - чтобы центровать элемент правильно */
+}
+
+.heading-primary {
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.heading-primary-main {
+    display: block;                     /* чтобы span не был inline */
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
 }
