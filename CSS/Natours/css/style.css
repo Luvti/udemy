@@ -53,7 +53,8 @@ body {
     position: absolute;
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%)    /* для сдвига относительно позиции - чтобы центровать элемент правильно */
+    transform: translate(-50%, -50%);    /* для сдвига относительно позиции - чтобы центровать элемент правильно */
+    text-align: center;                 /* для выравнивания кнопки по центру */
 }
 
 .heading-primary {
@@ -61,6 +62,7 @@ body {
     text-transform: uppercase;
 
     backface-visibility: hidden;        /* fix скачков текста при анимации - игнорирует div, к которому применяется анимация */
+    margin-bottom: 60px;                /* отступ после h1 перед кнопкой */
 }
 
 .heading-primary-main {
@@ -115,4 +117,29 @@ body {
         transform: translate(0);
         
     }
+}
+
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;             /* top-bottom, left-right */
+    display: inline-block;
+    border-radius: 100px;           /* скругление кнопок */
+    transition: all .2s;            /* ставит duration всем трансформациям (hover и active) */
+}
+
+.btn:hover {
+    transform: translateY(-3px);                                /* вверх - отрицательные */
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);                /* y x blur color*/
+}
+
+.btn:active {                       /* срабатывает на click */
+    transform: translateY(-1px);    /* вверх - отрицательные */
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);                  /* чем меньше y, x и blur - тем ближе к экрану*/
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #777;
 }
