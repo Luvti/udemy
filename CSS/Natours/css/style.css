@@ -107,15 +107,22 @@ body {
 @keyframes moveInRight {
     0% {
         opacity: 0;
-        transform: translateX(100px);  /* отрицательные - влево, положительные - вправо*/
-    }
-    80% {
-        transform: translateX(-10px);
+        transform: translateX(100px);  /* отрицательные - вверх, положительные - вниз */
     }
     100% {
         opacity: 1;
         transform: translate(0);
         
+    }
+}
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);  /* отрицательные - влево, положительные - вправо*/
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
     }
 }
 
@@ -127,6 +134,8 @@ body {
     display: inline-block;
     border-radius: 100px;           /* скругление кнопок */
     transition: all .2s;            /* ставит duration всем трансформациям (hover и active) */
+
+    position: relative;             /* для того, чтобы эффект на кнопке мог быть с абсолютным позиционированием*/
 }
 
 .btn:hover {
@@ -142,4 +151,27 @@ body {
 .btn-white {
     background-color: #ffffff;
     color: #777;
+}
+.btn::after {
+    content: "";                    /* required */
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: -1;                /* чтобы эффект был ниже кнопки */
+    transition: all 0.4s;
+}
+.btn-white::after {
+    background-color: #ffffff;
+}
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);         /* увеличивает кнопку */
+    opacity: 0;
+}
+.btn-animated {
+    animation: moveInBottom .5s ease-out .75s;
+    animation-fill-mode: backwards;             /* ставит на 0% до анимации */
 }
