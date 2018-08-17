@@ -7,20 +7,29 @@ Dark green: #28b485
 
 */
 /* универсальный селектов - всех элементов */
-* {
+*,
+*::after,                               /* sudo elements*/
+*::before {
     margin: 0;                          /* удаляет у всех элементов margin */
     padding: 0;                         /* удаляет у всех элементов padding */
-    box-sizing: border-box;             /* удаляет у всех элементов с рамками отступы */
+    box-sizing: inherit;                /* best practice */
+}
+
+/* root font size for rem */
+html {
+    font-size: 62.5%;                    /* 1 rem, 100% = 16px; */
 }
 
 /* задается для body, чтобы не перетирать подключаемые шрифты */
 body {
     font-family: "Lato", sans-serif;    /* Lato - google font, подключен на index */
     font-weight: 400;
-    font-size: 16px;
+    /* font-size: 16px; */
     line-height: 1.7;                   /* чтобы строки были больше обычного размера */
     color: #777;
-    padding: 30px;
+    padding: 3rem;
+
+    box-sizing: border-box;             /* удаляет у всех элементов с рамками отступы */
 }
 
 .header {
@@ -41,12 +50,12 @@ body {
 
 .logo-box {
     position: absolute;                 /* для этого у родительского элемента должен быть position: relative*/
-    top: 40px;
-    left: 40px;
+    top: 4rem;
+    left: 4rem;
 }
 
 .logo {
-    height: 35px;
+    height: 3.5rem;
 }
 
 .text-box {
@@ -62,14 +71,14 @@ body {
     text-transform: uppercase;
 
     backface-visibility: hidden;        /* fix скачков текста при анимации - игнорирует div, к которому применяется анимация */
-    margin-bottom: 60px;                /* отступ после h1 перед кнопкой */
+    margin-bottom: 6rem;                /* отступ после h1 перед кнопкой */
 }
 
 .heading-primary-main {
     display: block;                     /* чтобы span не был inline */
-    font-size: 60px;
+    font-size: 6rem;
     font-weight: 400;
-    letter-spacing: 35px;
+    letter-spacing: 3.5rem;
 
     animation-name: moveInLeft;
     animation-duration: 1s;
@@ -83,9 +92,9 @@ body {
 
 .heading-primary-sub {
     display: block;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 700;
-    letter-spacing: 17.4px;
+    letter-spacing: 1.75rem;
     
     animation: moveInRight 1s ease-out; /* inline animation props*/
 }
@@ -93,10 +102,10 @@ body {
 @keyframes moveInLeft {
     0% {
         opacity: 0;
-        transform: translateX(-100px);  /* отрицательные - влево, положительные - вправо*/
+        transform: translateX(-10rem);  /* отрицательные - влево, положительные - вправо*/
     }
     80% {
-        transform: translateX(10px);    /* для поворота: rotate(180deg); */
+        transform: translateX(1rem);    /* для поворота: rotate(180deg); */
     }
     100% {
         opacity: 1;
@@ -107,7 +116,10 @@ body {
 @keyframes moveInRight {
     0% {
         opacity: 0;
-        transform: translateX(100px);  /* отрицательные - вверх, положительные - вниз */
+        transform: translateX(10rem);  /* отрицательные - вверх, положительные - вниз */
+    }
+    80% {
+        transform: translateX(-1rem);
     }
     100% {
         opacity: 1;
@@ -118,7 +130,7 @@ body {
 @keyframes moveInBottom {
     0% {
         opacity: 0;
-        transform: translateY(30px);  /* отрицательные - влево, положительные - вправо*/
+        transform: translateY(3rem);  /* отрицательные - влево, положительные - вправо*/
     }
     100% {
         opacity: 1;
@@ -130,22 +142,23 @@ body {
 .btn:visited {
     text-transform: uppercase;
     text-decoration: none;
-    padding: 15px 40px;             /* top-bottom, left-right */
+    padding: 1.5rem 4rem;             /* top-bottom, left-right */
     display: inline-block;
-    border-radius: 100px;           /* скругление кнопок */
+    border-radius: 10rem;           /* скругление кнопок */
     transition: all .2s;            /* ставит duration всем трансформациям (hover и active) */
+    font-size: 1.6 rem;
 
     position: relative;             /* для того, чтобы эффект на кнопке мог быть с абсолютным позиционированием*/
 }
 
 .btn:hover {
-    transform: translateY(-3px);                                /* вверх - отрицательные */
-    box-shadow: 0 10px 20px rgba(0,0,0,.2);                /* y x blur color*/
+    transform: translateY(-.3rem);                                /* вверх - отрицательные */
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.2);                /* y x blur color*/
 }
 
 .btn:active {                       /* срабатывает на click */
-    transform: translateY(-1px);    /* вверх - отрицательные */
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);                  /* чем меньше y, x и blur - тем ближе к экрану*/
+    transform: translateY(-.1rem);    /* вверх - отрицательные */
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);                  /* чем меньше y, x и blur - тем ближе к экрану*/
 }
 
 .btn-white {
@@ -157,7 +170,7 @@ body {
     display: inline-block;
     height: 100%;
     width: 100%;
-    border-radius: 100px;
+    border-radius: 10rem;
     position: absolute;
     top:0;
     left: 0;
