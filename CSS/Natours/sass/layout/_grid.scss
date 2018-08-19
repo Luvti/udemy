@@ -1,6 +1,5 @@
 .row {
   max-width: $grid-width;               //1140px - best practice для ширины
-  background-color: #eee;
   margin: 0 auto;                       // 0 сверху и низу, авто слева и справа 
   
   &:not(:last-child) {                  // sudo-class not()
@@ -10,7 +9,6 @@
   @include clearfix;                    // при float пропадает высота колонки - для ее исправления
 
   [class^='col-'] {
-    background-color: orangered;
     float: left;
 
     &:not(:last-child) {
