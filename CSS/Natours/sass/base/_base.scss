@@ -1,0 +1,18 @@
+
+/* универсальный селектор - всех элементов */
+*,
+*::after,                                     /* sudo element */
+*::before {
+    margin: 0;                                /* удаляет у всех элементов margin */
+    padding: 0;                               /* удаляет у всех элементов padding */
+    box-sizing: inherit;                      /* best practice */
+}
+
+/* root font size for rem */
+html {
+    font-size: 62.5%;                         /* определяет значение 1 rem, 100% = 16px; */
+}
+
+body {
+    box-sizing: border-box;                   /* удаляет у всех элементов с рамками отступы */
+}
