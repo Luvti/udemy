@@ -1,5 +1,5 @@
 .card {
-
+    // FUNCTIONALITY
     perspective: 150rem;                // перспектива для поворотной карточке
     -mox-perspective: 150rem;            // правка для работы в Mozilla
     position: relative;
@@ -18,6 +18,7 @@
 
         backface-visibility: hidden;
         border-radius: .3rem;
+        overflow: hidden;               // для исправления углов на картинке
         box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
         &--front {
             background-color: $color-white;
@@ -37,10 +38,56 @@
     }
 
     &:hover &__side--front {
-        transform: rotateY(180deg);
+        transform: rotateY(-180deg);
     }
 
     &:hover &__side--back {
         transform: rotateY(0);
+    }
+    //FRONT SIDE STYLING
+    // для картинок unsplash.com
+    &__picture {
+        background-size: cover;
+        height: 23rem;
+        background-blend-mode: screen;                                          // не работает в IE, новая фича
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);              // правка для браузеров, не работает в IE
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+         // ../ а не ../../ так как относительно пути скомпилированного css
+        &--1 {
+            background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark), url(../img/nat-5.jpg)
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), url(../img/nat-5.jpg)
+        } 
+        &--3 {
+            background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-5.jpg)
+        } 
+    }
+
+    &__heading {
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: right;
+        color: $color-white;
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+        width: 60%;
+    }
+
+    &__heading-span {
+        padding: 1rem 1.5rem;
+        &--1 {
+            background-image: linear-gradient(to right bottom, rgba($color-secondary-light, .85),  rgba($color-secondary-dark, .85));
+        }
+        &--2 {
+            background-image: linear-gradient(to right bottom, rgba($color-primary-light, .85), rgba($color-primary-dark, .85));
+        }
+        &--3 {
+            background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, .85), rgba($color-tertiary-dark,  .85));
+        }
     }
 }
