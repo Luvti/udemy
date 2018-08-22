@@ -3,12 +3,11 @@
     perspective: 150rem;                // перспектива для поворотной карточке
     -mox-perspective: 150rem;            // правка для работы в Mozilla
     position: relative;
-    height: 50rem;                      // устанавливаем ту же высоту, что у карточек, чтобы был эффект перспективы у карточек, которые float
+    height: 52rem;                      // устанавливаем ту же высоту, что у карточек, чтобы был эффект перспективы у карточек, которые float
 
     &__side {
-        color: #fff;
         font-size: 2rem;
-        height: 50rem;
+        height: 52rem;                  // высота та же что у родительского элемента
         transition: all .8s ease;
 
         position: absolute;
@@ -52,6 +51,9 @@
         background-blend-mode: screen;                                          // не работает в IE, новая фича
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);              // правка для браузеров, не работает в IE
         clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        // если не скругляются углы картинок при overflow: hidden;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
 
          // ../ а не ../../ так как относительно пути скомпилированного css
         &--1 {
@@ -59,10 +61,10 @@
         }
 
         &--2 {
-            background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), url(../img/nat-5.jpg)
+            background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), url(../img/nat-6.jpg)
         } 
         &--3 {
-            background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-5.jpg)
+            background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-7.jpg)
         } 
     }
 
@@ -80,6 +82,9 @@
 
     &__heading-span {
         padding: 1rem 1.5rem;
+        box-decoration-break: clone;                 // чтобы padding был для каждой строчки
+        -webkit-box-decoration-break: clone;         //fix для Google Chrome 
+
         &--1 {
             background-image: linear-gradient(to right bottom, rgba($color-secondary-light, .85),  rgba($color-secondary-dark, .85));
         }
@@ -89,5 +94,48 @@
         &--3 {
             background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, .85), rgba($color-tertiary-dark,  .85));
         }
+    }
+
+    &__details {
+        padding: 3rem;
+
+        ul {
+            list-style: none;
+            width: 80%;
+            margin: 0 auto;
+
+            li {
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+
+                &:not(:last-child) {
+                    border-bottom: 0.1rem solid $color-gray-light-2;
+                }
+            }
+        }
+    }
+
+    // FRONT SIDE SRTYLING
+    &__cta {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;                             //для исправления ширины кнопки
+        text-align: center;                     // для выравнивания кнопки по центру
+    }
+    &__price-box {
+        text-align: center;
+        color: $color-white;                    // цвет наследуется в __price-only и __price-value
+        margin-bottom:  8rem;
+    }
+    &__price-only {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+    &__price-value {
+        font-size: 6rem;
+        font-weight: 100;
     }
 }
