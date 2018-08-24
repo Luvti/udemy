@@ -12,7 +12,8 @@
   position: relative;
 
     /* изменение формы background */
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);              // правка для браузеров Safary, , не работает в IE
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);                      // не работает в IE
 
   &__logo-box {
     position: absolute;                     /* для этого у родительского элемента должен быть position: relative*/
