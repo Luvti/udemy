@@ -1,9 +1,62 @@
 .story {
-    width: 75%;
-    margin: 0 auto;
-    box-shadow: 0 3rem 6rem rgba($color-black, .1);
-    background-color: $color-white;
-    border-radius: .3rem;
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: $color-white;
+  border-radius: 0.3rem;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
 
-    padding: 6rem;
+  // так не применится из-за того, что на круге уже есть transform, 2 не применяются
+  // & > * {
+  //  transform: skewX(12deg);
+  // }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    // shape-outside в %% работает только с float. для выравнивая текста вокруг фигуры - например кругов и элипсов
+    shape-outside: circle(50% at 50% 50%); // радиус на точке x и y
+    -webkit-shape-outside: circle(
+      50% at 50% 50%
+    ); // для Сафари, не работает в Мозилле и ИЕ
+    clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+  }
+  &__img {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);  // для движения картинки
+    backface-visibility: hidden;              // фикс если картинку сплющило после transform
+    transition: all 0.5s;
+  }
+  &__text {
+    transform: skewX(12deg);
+  }
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;            // фикс скачка на 1 пиксель в сторону
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(.3rem) brightness(80%);    // затемнение при < 100%
+  }
 }
