@@ -5,3 +5,10 @@
     clear: both;        // float-left & float-right
   }
 }
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: .3rem;
+}

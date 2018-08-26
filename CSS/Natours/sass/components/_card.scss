@@ -118,10 +118,7 @@
 
     // FRONT SIDE SRTYLING
     &__cta {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @include absCenter;
         width: 90%;                             //для исправления ширины кнопки
         text-align: center;                     // для выравнивания кнопки по центру
     }
