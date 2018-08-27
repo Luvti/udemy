@@ -4,8 +4,7 @@ body {
   font-weight: 400;
   /* font-size: 16px; */
   line-height: 1.7;                         /* чтобы строки были больше обычного размера */
-  color: $color-gray-dark;
-  padding: 3rem;
+  color: $color-gray-dark;  
 }
 
 .heading-primary {
@@ -21,10 +20,15 @@ body {
     font-weight: 400;
     letter-spacing: 3.5rem;
 
+    @include respond(phone) {
+      font-size: 5rem;
+      letter-spacing:1rem;
+    }
+
     animation-name: moveInLeft;
     animation-duration: 1s;
     animation-timing-function: ease-out;
-
+    
     /*
     animation-delay: 3s;
     animation-iteration-count: 3;
@@ -36,6 +40,11 @@ body {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 1.75rem;
+
+    @include respond(phone) {
+      letter-spacing:.5rem;
+    }
+
       
     animation: moveInRight 1s ease-out; /* inline animation props*/
   }
@@ -50,6 +59,13 @@ body {
   -webkit-background-clip: text;      // для установки градиента фоном текста
   color: transparent;
   letter-spacing: .2rem;
+
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+  @include respond(phone) {
+    font-size: 2.5rem;
+  }
 
   transition: all .2s;
 

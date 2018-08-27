@@ -14,6 +14,7 @@ html {
     font-size: 62.5%;                         /* определяет значение 1 rem, 100% = 16px; */
 
     // порядок важен!
+    // ORDER: Base + typography > general layout + grid > page layout + components
     // 1rem = 9px; 9/16 = 50%
     @include respond(tab-land) {            // < 1200px
         font-size: 56.25%;
@@ -32,4 +33,9 @@ html {
 
 body {
     box-sizing: border-box;                   /* удаляет у всех элементов с рамками отступы */
+    padding: 3rem;
+
+    @include respond(tab-port) {             // < 900px
+        padding: 0;
+    }
 }
