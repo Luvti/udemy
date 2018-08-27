@@ -5,8 +5,19 @@
       rgba($color-primary-light, 0.8),     /* #HEX работает только в sass. в css цвет должен задаваться не кодом, а rgba(126, 213, 111, 0.8)*/
       rgba($color-primary-dark, 0.8)
     ),
+    url(../img/hero-small.jpg);
+  // apple retina resolution
+  // media query всегда должны быть в em
+  @media (min-resolution: 192dpi) and (min-width: 37.5em),
+    (min-width: 125em) {
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-secondary-light, 0.8),     /* #HEX работает только в sass. в css цвет должен задаваться не кодом, а rgba(126, 213, 111, 0.8)*/
+      rgba($color-secondary-dark, 0.8)
+    ),
     url(../img/hero.jpg);
-  
+  }
+
   background-size: cover;                 /* пытается покрыть все пространство контейнера */
   background-position: top;
   position: relative;
