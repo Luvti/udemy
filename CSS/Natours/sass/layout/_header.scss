@@ -1,5 +1,5 @@
 .header {
-  height: 95vh;
+  height: 85vh;
   background-image: linear-gradient(
       to right bottom,
       rgba($color-primary-light, 0.8),     /* #HEX работает только в sass. в css цвет должен задаваться не кодом, а rgba(126, 213, 111, 0.8)*/
@@ -8,12 +8,14 @@
     url(../img/hero-small.jpg);
   // apple retina resolution
   // media query всегда должны быть в em
+  
   @media (min-resolution: 192dpi) and (min-width: 37.5em),
+    (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),    // min-resolution: 192dpi не работает в Safari, эта строка фиксит
     (min-width: 125em) {
     background-image: linear-gradient(
       to right bottom,
-      rgba($color-secondary-light, 0.8),     /* #HEX работает только в sass. в css цвет должен задаваться не кодом, а rgba(126, 213, 111, 0.8)*/
-      rgba($color-secondary-dark, 0.8)
+      rgba($color-primary-light, 0.8),     /* #HEX работает только в sass. в css цвет должен задаваться не кодом, а rgba(126, 213, 111, 0.8)*/
+      rgba($color-primary-dark, 0.8)
     ),
     url(../img/hero.jpg);
   }
@@ -22,9 +24,12 @@
   background-position: top;
   position: relative;
 
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    height: 95vh;
     /* изменение формы background */
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);              // правка для браузеров Safary, , не работает в IE
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);                      // не работает в IE
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);              // правка для браузеров Safari
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);                      // не работает в IE и Mozilla
+  }
 
   @include respond(phone) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);              // правка для браузеров Safary, , не работает в IE

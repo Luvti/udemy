@@ -15,6 +15,7 @@
     left: 0;
     width: 100%;
 
+    -webkit-backface-visibility: hidden;                // фикс для Safari
     backface-visibility: hidden;
     border-radius: 0.3rem;
     overflow: hidden; // для исправления углов на картинке

@@ -28,15 +28,21 @@
     width: 15rem;
     height: 15rem;
     float: left;
-    // shape-outside в %% работает только с float. для выравнивая текста вокруг фигуры - например кругов и элипсов
-    shape-outside: circle(50% at 50% 50%); // радиус на точке x и y
-    -webkit-shape-outside: circle(
-      50% at 50% 50%
-    ); // для Сафари, не работает в Мозилле и ИЕ
-    clip-path: circle(50% at 50% 50%);
-    -webkit-clip-path: circle(50% at 50% 50%);
+
     transform: translateX(-3rem) skewX(12deg);
     position: relative;
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      -webkit-clip-path: circle(50% at 50% 50%);
+      clip-path: circle(50% at 50% 50%);
+      // shape-outside в %% работает только с float. для выравнивая текста вокруг фигуры - например кругов и элипсов
+      shape-outside: circle(50% at 50% 50%);            // радиус на точке x и y
+      -webkit-shape-outside: circle( 50% at 50% 50% );  // для Сафари, не работает в Мозилле и ИЕ
+      border-radius: none;
+    }
 
     @include respond(phone) {
       transform: translateX(-3rem) skewX(0);
