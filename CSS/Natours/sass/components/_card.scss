@@ -175,8 +175,10 @@
     font-size: 6rem;
     font-weight: 100;
   }
-
-  @include respond(tab-port) {
+   // не поддерживается 2 медиа запроса - поэтому инлайн media
+   @media only screen and (max-width: 56.25em),
+    // если не поддерживается hover
+    only screen and(hover: none) {
     // FUNCTIONALITY
     height: auto;
     border-radius: 0.3rem;

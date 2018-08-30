@@ -9,9 +9,9 @@
   // apple retina resolution
   // media query всегда должны быть в em
   
-  @media (min-resolution: 192dpi) and (min-width: 37.5em),
-    (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),    // min-resolution: 192dpi не работает в Safari, эта строка фиксит
-    (min-width: 125em) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and(-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),    // min-resolution: 192dpi не работает в Safari, эта строка фиксит
+    only screen and (min-width: 125em) {
     background-image: linear-gradient(
       to right bottom,
       rgba($color-primary-light, 0.8),     /* #HEX работает только в sass. в css цвет должен задаваться не кодом, а rgba(126, 213, 111, 0.8)*/
