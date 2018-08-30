@@ -1,2 +1,5 @@
 CSS/Natours/node_modules/*
 CSS/Natours/css/style.css
+CSS/Natours/css/style.prefix.css
+CSS/Natours/css/style.concat.css
+CSS/Natours/css/style.comp.css
