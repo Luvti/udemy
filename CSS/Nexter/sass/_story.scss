@@ -9,7 +9,8 @@
   }
   &__img--1 {
     width: 100%;
-
+    grid-row: 2 / 6;
+    grid-column: 2 / 6;
   }
   &__img--2 {
     width: 100%;
