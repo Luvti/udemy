@@ -1,4 +1,4 @@
-//default parameters
+//rest parameters
 
 //ES5
 function isFullAge5() {
