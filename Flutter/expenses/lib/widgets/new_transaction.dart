@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class NewTransaction extends StatefulWidget {
   final Function addTx;
 
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +28,18 @@ class NewTransaction extends StatelessWidget {
                 labelText: 'Title',
               ),
               controller: titleController,
+              onSubmitted: (_) => submitData,
               // onChanged: (val) {titleInput = val;},
             ),
             TextField(
               decoration: InputDecoration(
                 labelText: 'Amount',
               ),
+              // iOS не позволяет для типа TextInputType.number() разделители чисел вводить, по-этому лучше использвать TextInputType.numberWithOptions(decimal: true)
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               // onChanged: (val) =>  amountInput = val,
               controller: amountController,
+              onSubmitted: (_) => submitData,
             ),
             FlatButton(
               child: Text('Add Transaction'),
@@ -36,15 +47,27 @@ class NewTransaction extends StatelessWidget {
               onPressed: () {
                 // print(titleInput);
                 // print(amountInput);
-                addTx(
-                  titleController.text,
-                  double.parse(amountController.text),
-                );
+                submitData();
               },
             )
           ],
         ),
       ),
     );
+  }
+
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount =  double.parse(amountController.text);
+    
+    if(enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+  
+    widget.addTx(
+      enteredTitle,
+      enteredAmount,
+    );
+    Navigator.of(context).pop();
   }
 }
