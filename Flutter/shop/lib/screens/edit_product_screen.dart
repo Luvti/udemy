@@ -20,7 +20,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _form = GlobalKey<FormState>();
   var _isInit = true;
   var _isLoading = false;
-  var _editedProduct = Product(id: null, title: '', price: 0, description: '', imageUrl: '');
+  var _editedProduct =
+      Product(id: null, title: '', price: 0, description: '', imageUrl: '');
   var _initValues = {
     'title': '',
     'price': '0',
@@ -58,8 +59,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
   void _updateImageUrl() {
     if (!_imageUrlFocusNode.hasFocus) {
       if (_imageUrlContainer.text.isEmpty ||
-          (!_imageUrlContainer.text.startsWith('http://') && !_imageUrlContainer.text.startsWith('https://')) ||
-          (!_imageUrlContainer.text.endsWith('.png') && !_imageUrlContainer.text.endsWith('.jpg') && !_imageUrlContainer.text.endsWith('.jpeg'))) {
+          (!_imageUrlContainer.text.startsWith('http://') &&
+              !_imageUrlContainer.text.startsWith('https://')) ||
+          (!_imageUrlContainer.text.endsWith('.png') &&
+              !_imageUrlContainer.text.endsWith('.jpg') &&
+              !_imageUrlContainer.text.endsWith('.jpeg'))) {
         return;
       }
       setState(() {});
@@ -76,7 +80,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     super.dispose();
   }
 
-  void _saveForm() {
+  Future<void> _saveForm() async {
     final isValid = _form.currentState.validate();
     if (!isValid) {
       return;
@@ -86,12 +90,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
     if (_editedProduct.id != null) {
-      Provider.of<Products>(context, listen: false).updateProduct(_editedProduct.id, _editedProduct);
-      _isLoading = false;
-      Navigator.of(context).pop();
+      await Provider.of<Products>(context, listen: false)
+          .updateProduct(_editedProduct.id, _editedProduct);
+      // _isLoading = false;
+      // Navigator.of(context).pop();
     } else {
-      Provider.of<Products>(context, listen: false).addProduct(_editedProduct).catchError((error) {
-        return showDialog(
+      try {
+        await Provider.of<Products>(context, listen: false)
+            .addProduct(_editedProduct);
+      }
+      // return showDialog(
+      catch (error) {
+        showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
             title: Text('An Error occured!'),
@@ -105,12 +115,22 @@ class _EditProductScreenState extends State<EditProductScreen> {
               ),
             ],
           ),
-        ).then((_) {
-          _isLoading = false;
-          Navigator.of(context).pop();
-        });
-      });
+        );
+      }
+      //).then((_) {
+      //  finally {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   Navigator.of(context).pop();
+      // }
     }
+
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
+    //}
   }
 
   @override
@@ -164,7 +184,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       keyboardType: TextInputType.number,
                       focusNode: _priceFocusNode,
                       onFieldSubmitted: (_) {
-                        FocusScope.of(context).requestFocus(_descriptionFocusNode);
+                        FocusScope.of(context)
+                            .requestFocus(_descriptionFocusNode);
                       },
                       validator: (value) {
                         if (value.isEmpty) {
@@ -254,10 +275,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               if (value.isEmpty) {
                                 return 'Please provide an image Url';
                               }
-                              if (!value.startsWith('http://') && !value.startsWith('https://')) {
+                              if (!value.startsWith('http://') &&
+                                  !value.startsWith('https://')) {
                                 return 'Please enter a valid Url';
                               }
-                              if (!value.endsWith('.png') && !value.endsWith('.jpg') && !value.endsWith('.jpeg')) {
+                              if (!value.endsWith('.png') &&
+                                  !value.endsWith('.jpg') &&
+                                  !value.endsWith('.jpeg')) {
                                 return 'Please enter a valid image Url';
                               }
                               return null;
