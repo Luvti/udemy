@@ -13,34 +13,47 @@ class ProductDetailsScreen extends StatelessWidget {
       listen: false, // не вызывает Rebiuld
     ).findById(productId);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(product.title),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 300,
-              width: double.infinity,
-              child: Image.network((product.imageUrl), fit: BoxFit.cover),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '\$${product.price}',
-              style: TextStyle(color: Colors.grey, fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              width: double.infinity,
-              child: Text(
-                '\$${product.description}',
-                textAlign: TextAlign.center,
-                softWrap: true,
+      // appBar: AppBar(
+      //   title: Text(product.title),
+      // ),
+      body: //SingleChildScrollView(
+          CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 300,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(product.title),
+              background: Hero(
+                tag: product.id,
+                child: Image.network((product.imageUrl), fit: BoxFit.cover),
               ),
             ),
-          ],
-        ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              <Widget>[
+                SizedBox(height: 10),
+                Text(
+                  '\$${product.price}',
+                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  width: double.infinity,
+                  child: Text(
+                    '\$${product.description}',
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                  ),
+                ),
+                //SizedBox(height: 800),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
