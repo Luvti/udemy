@@ -15,14 +15,18 @@ class Auth with ChangeNotifier {
   }
 
   String get token {
-    if (_expiryDate != null && _expiryDate.isAfter(DateTime.now()) && _token != null) {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
       return _token;
     }
     return null;
   }
 
-  Future<void> _authenticate(String email, String password, String urlSegment) async {
-    String url = 'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyCh19kzijnDCGqM7wQ8K0HWVkZIbGPKnQo';
+  Future<void> _authenticate(
+      String email, String password, String urlSegment) async {
+    String url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyCh19kzijnDCGqM7wQ8K0HWVkZIbGPKnQo';
     try {
       final response = await http.post(url,
           body: json.encode({
@@ -32,14 +36,17 @@ class Auth with ChangeNotifier {
           }));
       final responseData = json.decode(response.body);
       print(responseData);
+      _token = responseData['idToken'];
+      _userId = responseData['localId'];
+      _expiryDate = DateTime.now().add(
+        Duration(
+          seconds: int.parse(responseData['expiresIn']),
+        ),
+      );
+      notifyListeners();
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
-      _token = responseData['idToken'];
-      _userId = responseData['localId'];
-      _expiryDate = DateTime.now().add(Duration(
-        seconds: int.parse(responseData['expiresIn']),
-      ),);
     } catch (error) {
       throw error;
     }
