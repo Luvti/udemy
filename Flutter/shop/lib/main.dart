@@ -9,6 +9,7 @@ import './screens/product_detail_screen.dart';
 import './screens/products_overview_screen.dart';
 import './screens/user_products_screen.dart';
 
+import './providers/auth.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
@@ -29,22 +30,27 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Orders(),
         ),
-      ],
-      child: MaterialApp(
-        title: 'MyShop',
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.deepOrange,
-          fontFamily: 'Lato',
+        ChangeNotifierProvider.value(
+          value: Auth(),
         ),
-        home: AuthScreen(),
-        routes: {
-          ProductDetailsScreen.routePath: (ctx) => ProductDetailsScreen(),
-          CartScreen.routePath: (ctx) => CartScreen(),
-          OrdersScreen.routePath: (ctx) => OrdersScreen(),
-          UserProductsScreen.routePath: (ctx) => UserProductsScreen(),
-          EditProductScreen.routePath : (ctx) => EditProductScreen(),
-        },
+      ],
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+          title: 'MyShop',
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            accentColor: Colors.deepOrange,
+            fontFamily: 'Lato',
+          ),
+          home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+          routes: {
+            ProductDetailsScreen.routePath: (ctx) => ProductDetailsScreen(),
+            CartScreen.routePath: (ctx) => CartScreen(),
+            OrdersScreen.routePath: (ctx) => OrdersScreen(),
+            UserProductsScreen.routePath: (ctx) => UserProductsScreen(),
+            EditProductScreen.routePath: (ctx) => EditProductScreen(),
+          },
+        ),
       ),
     );
   }
