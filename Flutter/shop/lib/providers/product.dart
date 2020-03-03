@@ -9,6 +9,7 @@ class Product with ChangeNotifier {
   final String description;
   final double price;
   final String imageUrl;
+  // final String userId;
   bool isFavorite;
 
   Product({
@@ -24,14 +25,14 @@ class Product with ChangeNotifier {
      isFavorite = newValue;
     notifyListeners();
   }
-  Future<void> toggleFavoriteStatus(token) async {
+  Future<void> toggleFavoriteStatus(String token, String userId) async {
     final oldStatus = isFavorite;
     _setFavValue(!isFavorite);
-    final url = 'https://flutter-f541a.firebaseio.com/products/$id.json?auth=$token';
+    final url = 'https://flutter-f541a.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
     try {
-      final response = await http.patch(url, body: json.encode({
-        'isFavorite': isFavorite,
-      }));
+      final response = await http.put(url, body: json.encode(
+        isFavorite,
+      ));
       if (response.statusCode >= 400) {
         _setFavValue(oldStatus);
       }
