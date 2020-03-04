@@ -1,4 +1,4 @@
-const GOOGLE_API_KEY = 'AlzaSyDU8dbiSJ51Db4cOnXcVeLrsaaQ1kfT0Fc';
+const GOOGLE_API_KEY = 'AIzaSyDU8dbiSJ51Db4cOnXcVeLrsaaQ1kfT0Fc';
 
 
 class LocationHelper {
