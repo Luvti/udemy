@@ -1,2 +1,2 @@
 # udemy
-projects from udemy
+Study projects from udemy
